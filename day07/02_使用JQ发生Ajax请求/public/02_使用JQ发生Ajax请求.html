@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮-发送ajax-jq</button>
+    <script src="./jquery-1.12.4.js"></script>
+    <script>
+        $('#btn').on("click",()=>{
+            $.ajax({
+                type: 'post',//不写默认是get请求
+                url:"http://localhost:5000/test",//请求的地址
+                data:{ // 不管get还是post，都要通过 data属性，上传数据
+                    info: "天天开心"
+                },
+                dataType:"json",//期待后台返回的数据是json类型,如果真的是json字符串，后台会默认为json对象
+                timeout:2000, //超时时间
+                beforeSend: ()=>{
+                    // 请求发送之前的回调,如果这个里面return false, 则请求不会发送. return true, 才会发送请求
+                    console.log("请求之前");
+                    return true
+                },
+                success:(data)=>{
+                    // 请求响应成功,调用的回调
+                    // data就是返回的数据
+                    console.log(data);
+                },
+                error:(xhr)=>{
+                    // 请求错误的时候,会触发. xhr底层发送请求的xmlhttprequest对象
+                    console.log(xhr);
+                },
+                complete:()=>{
+                    //请求响应完成
+                    //不管成功还是失败，都会调用
+                    console.log("完成请求");
+                }
+            })
+        })
+    </script>
+</body>
+</html> 

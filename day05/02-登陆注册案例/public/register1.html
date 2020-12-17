@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form action="http://localhost:5000/register" method="POST">
+        用户名： <input type="text" name="username"><span></span><br>
+        邮箱：<input type="text" name="email"><span></span><br>
+        密码：<input type="password" name="psw"><span></span><br>
+        确认密码：<input type="password" name="repsw"><span></span><br>
+        <input type="submit" value="登录">
+    </form>
+    <script>
+        //1.获取元素
+         const email = document.querySelector('input[name=email]')
+         const psw = document.querySelector('input[name=psw]')
+         const repsw = document.querySelector('input[name=repsw]')
+         const username = document.querySelector('input[name=username]')
+         const registerBtn = document.querySelector('input[type=submit]')
+
+            userDalg = false
+            emailDalg = false
+            pswDalg = false
+            repswDalg = false
+
+         username.onblur=function(){
+            let value = this.value.trim()
+            let reg = /^[\u4e00-\u9fa5]{2,4}$/
+            let result = reg.test(value)
+            if(!result){
+                this.nextElementSibling.innerText = '请输入正确账户'
+                userDalg = false
+            } else {
+                this.nextElementSibling.innerHTML =  ''
+                userDalg = true
+            }
+         }
+         email.onblur=function(){
+            //去除空格
+            let value = this.value.trim()
+            //正则验证
+            let reg = /^\w+@\w+.(com|cn)$/
+            //获取验证值
+            let result = reg.test(value)
+            //判断验证的值
+            if(!result) {
+                this.nextElementSibling.innerText = '邮箱格式错误'
+                emailDalg = false
+            } else{
+                this.nextElementSibling.innerHTML = '' 
+                emailDalg = true
+            }
+            
+         }
+         psw.onblur=function(){
+            let value = this.value.trim()
+            let reg = /^\w{6,8}$/
+            let result = reg.test(value)
+            if(!result){
+                this.nextElementSibling.innerText = '密码不对'
+                pswDalg = false
+            }else{
+                this.nextElementSibling.innerHTML = ''
+                pswDalg = true
+            }
+         }
+        
+         repsw.onblur=function(){
+            let value = this.value.trim()
+            if(psw.value !== value){
+                this.nextElementSibling.innerText = '密码不统一'
+                repswDalg = false
+            }else{
+                this.nextElementSibling.innerHTML = ''
+                repswDalg = true
+            }
+         }
+         
+        
+         registerBtn.onclick=function(e){
+            if(!(userDalg&&emailDalg&&pswDalg&&repswDalg)) e.preventDefault()
+         }
+    </script>
+</body>
+</html>

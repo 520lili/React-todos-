@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <ul id="ul"></ul>
+   <script src="./template-web.js"></script>
+   <!-- 2. 准备模板 
+        type="text/html" 告诉js引擎,不要执行里面的代码
+        id 模板的唯一标识符 为了找到模板
+    -->
+   <script type="text/html" id="tmp1">
+    {{each arr}}
+        <li>
+            <h3>{{$value.name}}</h3>
+            <p>{{$value.age}}</p>
+            <ul>
+                {{each}}
+                <li></li>
+                {{each}}
+            </ul>
+        </li>
+    {{/each}}    
+   </script>
+
+   <script>
+       //发送ajax请求
+       //创建一个实例对象
+       const xhr = new XMLHttpRequest
+       // 设置请求行，open方法有三个参数(“求方式”，'请求地址路径' )
+       xhr.open('get', 'http://localhost:5000/test')
+       // 设置请求体
+       xhr.send()
+        //接收响应
+       xhr.onreadystatechange = () =>{
+        if(xhr.readyState === 4){
+            
+        }
+       }
+   </script>
+</body>
+</html>

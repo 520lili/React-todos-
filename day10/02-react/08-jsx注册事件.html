@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title{
+            width: 100px;
+            height: 100px;
+            background-color: steelblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+       
+    </div>
+    <!-- 注意: 1. 要先引react, 后引react-dom 2. 如果开发网页使用react-dom. 如果开发原生app,使用react-native -->
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+
+    <script type="text/babel">
+        //react-jsx中注册事件，事件和dom中是一样的.只是需要写成小驼峰命名法
+       let btn = <button onClick={()=>{
+            console.log("明天放假啦，哈哈哈");
+       }}>按钮</button>
+
+       let link = <a href='' className='title' onClick={(e)=>{
+        console.log('a被点击了');
+        console.log(e);
+        console.log(e.clientX);
+        //target指向事件目标对象，
+        console.log(e.target.innerText);
+        e.persist()
+        e.preventDefault()
+       }} >点击啦啦啦</a>
+
+       ReactDOM.render(link,document.getElementById('root'))
+    </script>
+</body>
+</html>

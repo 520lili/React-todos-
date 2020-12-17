@@ -1,0 +1,16 @@
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: yellow;
+}
+.img {
+  width: 100px;
+  height: 100px;
+  background-size: 100%;
+}
+.react {
+  background-image: url('../images/react.jpg');
+}
+.vue {
+  background-image: url('../images/vue.png');
+}

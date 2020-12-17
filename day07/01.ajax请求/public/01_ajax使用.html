@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">ajax的get请求</button>
+    <button id="btn1">ajax的post请求</button>
+    <!-- 
+        readState:ajax请求状态码
+            0:初始化状态
+            1:open方法打开路径，但是还没有调用send发送请求
+            2:send方法调用，并接收了部分响应信息：响应首行和响应头（比如响应状态码）
+            3:代表接受了部分响应体（当响应体比较大的时候）
+            4:代表响应体接受完毕，请求结束
+               
+     -->
+
+    <script>
+        const oBtn = document.getElementById('btn')
+        const oBtn1 = document.getElementById('btn1')
+        oBtn.onclick= function (){
+            // 发送ajax请求
+            // 1. 创建实例对象
+            const xhr = new XMLHttpRequest()
+            // 2. 设置请求行
+            // xhr.open('请求方式','请求的路径')
+            xhr.open('get', "http://localhost:3000/test?name=xiaohuang&age=18")
+            // 3. 设置请求头 但是由于是get请求,所以不需要设置请求头
+            // 4. 设置请求体,并发送请求 
+            // send()方法实参的位置就是请求体的内容,但是由于是get请求,所以可以不写,也可以直接写一个null
+            xhr.send()
+            console.log(123);
+        }
+        
+        oBtn1.onclick = function(){
+            const xhr = new XMLHttpRequest()
+            xhr.open('post',"http://localhost:3000/test")
+            // 3. 设置请求头 
+            xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded")
+
+            xhr.send("name=haung&age=18")
+
+            // 接收响应
+            // 注意: onreadystatechange只监听了readystate2,3,4的变化
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4) {
+                    // 注意: 响应完成了,不代表是成功的
+                    // 进入到这里才表示这次请求和响应完成
+                    // 获取响应行的数据,最终的也是获取状态码的值,所以一般都值获取状态码
+                  console.log('响应状态码', xhr.status);
+                  // 获取响应头的信息
+                    // xhr.getAllResponseHeaders() 获取响应头中所有的信息
+                    // xhr.getResponseHeader('键') 获取响应头中指定的信息
+                    console.log(xhr.getAllResponseHeaders());
+                    // console.log(xhr.getResponseHeader('content-type'));
+                  
+                  // 获取响应主体
+                  console.log(xhr.responseText); // 返回响应主体中的信息,是一个字符串
+                  console.log(JSON.parse(xhr.responseText));  
+                }
+            }
+        }
+        
+    </script>
+</body>
+</html>

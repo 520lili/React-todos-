@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn" >按钮-发送ajax-jq</button>
+    <!-- <script src="http://localhost:5000/test"></script> -->
+    <!-- <script>
+        btn.onclick = function(){
+
+            //在全局声明一个函数
+            // window.getData = function(data){
+            //     //如果script标签请求的数据响应了，这个函数会被调用.data可以接收到后台返回的数据
+            //     console.log(data);
+            // }
+            //1.创建动态script标签
+            const script = document.createElement('script')
+            script.src = "http://localhost:5000/test"
+            //2.将script标签,添加到DOM树上
+            document.body.appendChild(script)
+        }
+    </script> -->
+    <script>
+        btn.onclick = function(){
+
+            //在全局声明一个函数
+            window.getData = function(data){
+                //如果script标签请求的数据响应了，这个函数会被调用.data可以接收到后台返回的数据
+                console.log(data);
+            }
+            //1.创建动态script标签
+            const script = document.createElement('script')
+            script.src = "http://localhost:5000/test?callback=getData"
+            //2.将script标签,添加到DOM树上
+            document.body.appendChild(script)
+
+
+            // jsonp原理: 利用script标签,不受同源策略限制,去给服务器发送请求.请求的时候需要上传参数:callback=函数名. 然后再后台,后台需要获取这个参数,然后返回函数调用,前端需要的数据,就是这个函数调用的实参
+
+
+            // jsonp使用的时候的一些缺点: 
+            // 1. jsonp只支持get请求 
+            // 2. 必须后台配合
+        }
+    </script>
+</body>
+</html>

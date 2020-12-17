@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js//react-dom.development.js"></script>
+    <script src="./js/babel.min.js"></script>
+
+    <script type="text/babel">
+        let arr = [{id:1,name:'萌萌',age:18, hobby: '染发'},{id:2,name:'希希', age:19, hobby: '纹身'}]
+
+       const newArr = arr.map((item,index)=>{
+            return <li key={item.id}><div>名字：{item.name}</div><div>爱好：{item.hobby}</div><div>年龄：{item.age}</div></li>
+        })
+
+       let ul= <ul>
+            {newArr}
+        </ul>
+        ReactDOM.render(ul, document.getElementById('root'))
+    </script>
+</body>
+</html>
